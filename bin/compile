@@ -65,17 +65,17 @@ export PYTHONPATH="$BUILD_DIR/.heroku/vendor/lib/python3.4"
 # Setup environment
 mkdir -p $CACHE_DIR
 title "Generating environment"
-if [ ! -f $CACHE_DIR/vendor.tar.xz ]; then
+if [ ! -f $CACHE_DIR/vendor.tar.gz ]; then
 	subtitle "Fetching..."
-	curl -s -L "https://files.pythonhosted.org/packages/63/92/05c3b98636661cb80d190a5a777dd94effcc14c0f6893222e5ca81e74fbc/dlib-19.19.0.tar.gz" > $CACHE_DIR/vendor.tar.xz
+	curl -s -L "https://files.pythonhosted.org/packages/63/92/05c3b98636661cb80d190a5a777dd94effcc14c0f6893222e5ca81e74fbc/dlib-19.19.0.tar.gz" > $CACHE_DIR/vendor.tar.gz
 fi
 subtitle "Unpacking..."
-tar -xvf $CACHE_DIR/vendor.tar.xz -C $BUILD_DIR
+tar -xvf $CACHE_DIR/vendor.tar.gz -C $BUILD_DIR
 
 # installing application dependencies
 if [ -f $BUILD_DIR/requirements.txt ]; then
 	title "Found requirements.txt, installing dependencies using pip"
-	$BUILD_DIR/.heroku/vendor/bin/pip install -r requirements.txt --exists-action=w --src=./.heroku/src --allow-all-external
+	$BUILD_DIR/.heroku/vendor/bin/pip3 install -r requirements.txt --exists-action=w --src=./.heroku/src --allow-all-external
 fi
 
 # creating env variables
